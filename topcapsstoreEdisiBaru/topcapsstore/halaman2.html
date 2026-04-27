@@ -1,0 +1,59 @@
+section id="bayar" class="produk-section">
+    <h2>Form Pembayaran</h2>
+
+    <p><strong>Produk:</strong> <span id="NamaProduk"></span></p>
+    <div class="card">
+            <img src="produk2.png">
+            <p>Desain Sporty Dan Modern</p>
+            <strong>Rp 280.000</strong>
+    <p><strong>Warna:</strong> (Putih)  (Hitam)  (Cream)  (Abu-Abu)  (Biru)</strong></p>
+    <p><strong>Ukuran:</strong> S/M, M/L, L/XL <span id="UkuranProduk"></span></p>
+    <p><strong>Total:</strong> Rp <span id="HargaProduk"></span></p>
+
+    <form onsubmit="bayar(event)">
+        <label>Alamat Lengkap</label>
+        <textarea id="alamatPembeli" required></textarea>
+
+        <label>Warna</label>
+        <input type="text" id="Putih Hitam" required>
+
+        <label>Ukuran</label>
+        <input type="text" id="ukuranPembeli" required>
+
+        <h2>Pilih Metode Pembayaran</h2>
+
+<form>
+
+<label class="payment">
+<input type="radio" name="payment">
+<img src="bank.png">
+Transfer Bank
+</label>
+
+<label class="payment">
+<input type="radio" name="payment">
+<img src="dana.png">
+DANA
+</label>
+
+<label class="payment">
+<input type="radio" name="payment">
+<img src="ovo.png">
+OVO
+</label>
+
+<label class="payment">
+<input type="radio" name="payment">
+<img src="gopay.png">
+GoPay
+</label>
+
+<label class="payment">
+<input type="radio" name="payment">
+<img src="cod.png">
+COD (Bayar di Tempat)
+</label>
+
+        <button type="submit">Bayar Sekarang</button>
+    </form>
+</section>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopCaps Store</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url(wp1.png);
+    background-size: cover 33px ;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background-color: #858282;
+    color: rgb(239, 239, 239);
+}
+
+nav ul {
+        list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 70px 50px;
+}
+
+.hero-text {
+    max-width: 480   px;
+}
+
+.hero-text h1 {
+    font-size: 50px;
+    color: #e8e4e4;
+}
+
+.hero-text p {
+    font-size: 15px;
+    color: #cfcbcb;
+    margin: 24px 0;
+}
+
+.hero-text button {
+    padding: 12px 22px;
+    background-color: #db4545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.hero-img {
+    width: 420px;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(83, 83, 85, 0.25);
+}
+
+.hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.produk-section {
+    padding: 50px;
+    background-color: #454446;
+}
+
+.produk-section h2 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.produk-section p {
+    text-align: center;
+    color: #e0dddd;
+}
+
+.produk {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background-color: #cdcdcd;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h3 {
+    margin: 12px 0 5px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #222323;
+}
+
+.card strong {
+    display: block;
+    margin: 10px 0;
+    color: #862424;
+}
+
+.card button {
+    background-color: #d45252;
+    color: rgb(240, 240, 240);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#bayar {
+    display: none;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e1624c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.payment {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>TopCaps Store </h2>
+    <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#alamat">Alamat</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="beranda" class="hero">
+    <div class="hero-text">
+        <h1>TOPCAPS </h1>
+        <p>Menyediakan berbagai topi berkualitas dan stylish, menawarkan berbagai model topi seperti snapback, baseball cap, bucket hat, dan topi casual lainnya yang mengikuti tren fashion.</p>
+        <button onclick="document.getElementById('produk').scrollIntoView()">Lihat Semua Produk</button>
+    </div>
+
+
+</section>
+
+<section id="produk" class="produk-section">
+    <h2>Produk Unggulan</h2>
+
+    <div class="produk">
+        <div class="card">
+            <img src="produk7.png">
+            <h3>Topi Rucas</h3>
+            <p>Style Biker Atau Street Fashion</p>
+            <strong>Rp 980.000</strong>
+            <button onclick="beli('Topi Rucas',1000000)">Beli</button>
+        </div>
+
+        <div class="card">
+            <img src="produk2.png">
+            <h3>Topi Puma</h3>
+            <p>Desain Sporty Dan Modern</p>
+            <strong>Rp 280.000</strong>
+            <button onclick="beli('Topi Puma',280000)">Beli</button>
+        </div>
+
+        <div class="card">
+            <img src="produk3.png">
+            <h3>Topi Nike</h3>
+            <p>Model Yang Sangat Keren dan elegan</p>
+            <strong>Rp 190.000</strong>
+            <button onclick="beli('Topi Nike',190000)">Beli</button>
+        </div>
+
+        <div class="card">
+            <img src="produk4.png">
+            <h3>Topi Delibra</h3>
+            <p>Gaya Casual Dan Streetwear</p>
+            <strong>Rp 150.000</strong>
+            <button onclick="beli('Topi Delibra',150000)">Beli</button>
+        </div>
+
+        <div class="card">
+            <img src="produk5.png">
+            <h3>Topi CHBM</h3>
+            <p>Desain Yang Elegan Dan Simpel
+            </p>
+            <strong>Rp 128.000</strong>
+            <button onclick="beli('Topi CHBM',128000)">Beli</button>
+        </div>
+
+        <div class="card">
+            <img src="produk6.png">
+            <h3>Topi Polo</h3>
+            <p>Simpel Dan Sporty</p>
+            <strong>Rp 188.000</strong>
+            <button onclick="beli('Topi Polo',188000)">Beli</button>
+        </div>
+    </div>
+</section>
+
+<section id="bayar" class="produk-section">
+    <h2>Form Pembayaran</h2>
+
+    <p><strong>Produk:</strong> <span id="NamaProduk"></span></p>
+    <div class="card">
+            <img src="produk7.png">
+            <p>Style Biker Atau Street Fashion</p>
+            <strong>Rp 980.000</strong>
+    <p><strong>Warna:</strong> (Putih)  (Hitam)  (Cream)  (Abu-Abu)  (Biru)</strong></p>
+    <p><strong>Ukuran:</strong> S/M, M/L, L/XL <span id="UkuranProduk"></span></p>
+    <p><strong>Total:</strong> Rp <span id="HargaProduk"></span></p>
+
+    <form onsubmit="bayar(event)">
+        <label>Alamat Lengkap</label>
+        <textarea id="alamatPembeli" required></textarea>
+
+        <label>Warna</label>
+        <input type="text" id="Putih Hitam" required>
+
+        <label>Ukuran</label>
+        <input type="text" id="ukuranPembeli" required>
+
+        <h2>Pilih Metode Pembayaran</h2>
+
+<form>
+<div class="payment">
+    <label class="payment">
+<input type="radio" name="payment">
+<img src="bank.png">
+Transfer Bank
+</label>
+</div>
+
+<div class="payment">
+<label class="payment">
+<input type="radio" name="payment">
+<img src="dana.png">
+DANA
+</label>
+</div>
+
+<div class="payment">
+    <label class="payment">
+<input type="radio" name="payment">
+<img src="ovo.png">
+OVO
+</label>
+</div>
+
+<div class="payment">
+<label class="payment">
+<input type="radio" name="payment">
+<img src="gopay.png">
+GoPay
+</label>
+</div>
+
+<div class="payment">
+    <label class="payment">
+<input type="radio" name="payment">
+<img src="cod.png">
+COD (Bayar di Tempat)
+</label>
+</div>
+
+        <button type="submit">Bayar Sekarang</button>
+    </form>
+</section>
+
+<section id="alamat" class="produk-section">
+    <h2>Alamat Toko</h2>
+    <p style="text-align:center;">JL.Dusun rowotengu, Desa ndarungan semboro, KAB.JEMBER JAWA TIMUR</p>
+</section>
+
+<section id="Contact" class="produk-section">
+    <h2>Contact Person</h2>
+    <p style="text-align:center;">WhatsApp: 082141430355</p>
+    <p style="text-align:center;">Instagram: mbii_xb</p>
+    <p style="text-align: center;">Email: mbiiax49@gmail.com</p>
+</section>
+
+<script>
+let produk = "";
+let harga = 0;
+
+function beli(n, h) {
+    produk = n;
+    harga = h;
+
+    document.getElementById("NamaProduk").innerText = n;
+    document.getElementById("HargaProduk").innerText = h;
+    document.getElementById("bayar").style.display = "block";
+    document.getElementById("bayar").scrollIntoView({behavior:"smooth"});
+}
+
+function bayar(e) {
+    e.preventDefault();
+    alert("PESANAN ANDA TELAH KAMI TERIMA")
+    alert("TERIMAKASIH TELAH BERBELANJA DI TOPCAPS STORE\n\nProduk: " + produk);
+}
+</script>
+
+</body>
+</html>

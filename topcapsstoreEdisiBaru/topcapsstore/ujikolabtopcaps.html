@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopCaps Store</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background-image:url(wp1.png);
+background-size:contain;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 50px;
+background:#858282;
+color:white;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+}
+
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px 50px;
+}
+
+.hero-text{
+max-width:480px;
+}
+
+.hero-text h1{
+font-size:50px;
+color:#e8e4e4;
+}
+
+.hero-text p{
+color:#cfcbcb;
+margin:20px 0;
+}
+
+.hero-text button{
+padding:12px 22px;
+background:#db4545;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.produk-section{
+padding: 55px;
+background:#454446;
+}
+
+.produk-section h2{
+text-align:center;
+color:white;
+margin-bottom:40px;
+}
+
+.produk{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.card{
+background:#cdcdcd;
+padding:10px;
+border-radius:15px;
+text-align:center;
+}
+
+.card img{
+width:120px;
+height:110px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.card p{
+font-size:14px;
+line-height:1.45;
+margin:10px 0;
+color:#444343;
+}
+
+.card strong{
+display:block;
+margin:10px 0;
+color:#862424;
+}
+
+.card button{
+background:#d45252;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:5px;
+cursor:pointer;
+}
+
+#bayar{
+display:none;
+}
+
+form input, form textarea{
+width:100%;
+padding:8px;
+margin-bottom:12px;
+}
+
+form button{
+width:100%;
+padding:10px;
+background:#e1624c;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.payment{
+display:grid;
+grid-template-columns:36px 40px 1fr auto;
+align-items:center;
+gap:10px;
+margin:8px 0;
+padding:10px 12px;
+border:1px solid rgba(255,255,255,0.18);
+border-radius:12px;
+background:rgba(255,255,255,0.08);
+}
+
+.payment input{
+width:18px;
+height:18px;
+margin:0;
+accent-color:#e1624c;
+}
+
+.payment img{
+width:34px;
+height:34px;
+object-fit:contain;
+}
+
+.payment-number{
+width:30px;
+height:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#e1624c;
+color:#fff;
+border-radius:50%;
+font-size:12px;
+font-weight:700;
+}
+
+.payment-label{
+font-size:14px;
+font-weight:700;
+color:#222;
+}
+
+.payment-small{
+font-size:12px;
+color:#ccc;
+margin-top:4px;
+}
+
+.payment-phone{
+display:none;
+margin:12px 0 0;
+padding:10px 12px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.18);
+border-radius:12px;
+}
+
+.payment-phone label{
+display:block;
+margin-bottom:6px;
+font-size:13px;
+color:#fff;
+}
+
+.payment-phone input{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+background:#fff;
+color:#222;
+}
+
+.payment-phone small{
+display:block;
+margin-top:6px;
+font-size:12px;
+color:#ddd;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>TopCaps Store</h2>
+
+<ul>
+<li><a href="#beranda">Beranda</a></li>
+<li><a href="#produk">Produk</a></li>
+<li><a href="#alamat">Alamat</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+
+<section id="beranda" class="hero">
+
+<div class="hero-text">
+<h1>TOPCAPS</h1>
+
+<p>Menyediakan berbagai topi berkualitas dan stylish dengan model snapback, baseball cap, bucket hat, dan berbagai topi kekinian.</p>
+
+<button onclick="document.getElementById('produk').scrollIntoView()">
+Lihat Semua Produk
+</button>
+
+</div>
+
+</section>
+
+
+<section id="produk" class="produk-section">
+
+<h2>Produk Unggulan</h2>
+
+<div class="produk">
+
+<div class="card">
+<img src="produk5.png">
+<h3>Topi CHBM</h3>
+<p>Topi bergaya biker/street fashion, cocok untuk tampilan santai dan keren sehari-hari</p>
+<strong>Rp 150.000</strong>
+<button type="button" onclick="beli('Topi CHBM',155000,'produk5.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="prodk4.png">
+<h3>Topi Delibra</h3>
+<p>Desain sporty dan modern, nyaman dipakai untuk aktivitas outdoor maupun kasual</p>
+<strong>Rp 175.000</strong>
+<button type="button" onclick="beli('Topi Delibra',178000,'prodk4.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="prodk6.png">
+<h3>Topi Polo</h3>
+<p>Model elegan dan stylish, cocok untuk tampilan rapi namun tetap santai</p>
+<strong>Rp 188.000</strong>
+<button type="button" onclick="beli('Topi Polo',190000,'prodk6.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="produk3.png">
+<h3>Topi Nike</h3>
+<p>Gaya casual streetwear, ringan dan cocok untuk aktivitas harian</p>
+<strong>Rp195.000</strong>
+<button type="button" onclick="beli('Topi Nike',198000,'produk3.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="produk8.png">
+<h3>Topi NY</h3>
+<p>Desain simpel dan elegan, mudah dipadukan dengan berbagai outfit</p>
+<strong>Rp 280.000</strong>
+<button type="button" onclick="beli('Topi NY',300000,'produk8.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="prodk2.png">
+<h3>Topi Puma</h3>
+<p>Style sporty dan street fashion, memberikan kesan aktif dan trendy</p>
+<strong>Rp 350.000</strong>
+<button type="button" onclick="beli('Topi Puma',390000,'prodk2.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="produk10.png">
+<h3>Topi Adidas</h3>
+<p>Desain klasik dengan nuansa street style, nyaman dan fashionable</p>
+<strong>Rp 440.000</strong>
+<button type="button" onclick="beli('Topi Adidas',490000,'produk10.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="produkk9.png">
+<h3>Topi Stone Island</h3>
+<p>Tampilan premium dengan gaya street fashion, cocok untuk look eksklusif</p>
+<strong>Rp 530.000</strong>
+<button type="button" onclick="beli('Topi Stone Island',580000,'produkk9.png')">Beli</button>
+</div>
+
+<div class="card">
+<img src="prodk7.png">
+<h3>Topi Rucas</h3>
+<p>Desain unik dengan sentuhan street style, cocok untuk tampil beda dan percaya diri</p>
+<strong>Rp 688.000</strong>
+<button type="button" onclick="beli('Topi Rucas',690000,'prodk7.png')">Beli</button>
+</div>
+
+</div>
+</section>
+
+<section id="bayar" class="produk-section">
+
+<h2>Form Pembayaran</h2>
+
+<p><strong>Produk:</strong> <span id="NamaProduk"></span></p>
+
+<div class="card">
+
+<img id="FotoProduk" width="150">
+
+<p><strong>Harga:</strong> Rp <span id="HargaProduk"></span></p>
+
+<p><strong>Total:</strong> Rp <span id="TotalHarga"></span></p>
+
+</div>
+
+<form onsubmit="bayar(event)">
+
+<label>Nama Lengkap</label>
+<input id="namaPembeli" type="text" placeholder="Nama lengkap" required>
+
+<label>Alamat Lengkap</label>
+<textarea id="alamat" required></textarea>
+
+<label>Warna</label>
+<input id="warna" type="text" placeholder="HITAM, ABU-ABU, PUTIH, NAVY" required>
+
+<label>Ukuran</label>
+<input id="ukuran" type="text" placeholder="S / M / L" required>
+
+<h3>Pilih Metode Pembayaran</h3>
+
+<label class="payment">
+<span class="payment-number">1</span>
+<img src="bank.png" alt="Transfer Bank">
+<div>
+<span class="payment-label">Transfer Bank</span>
+<span class="payment-small">Pilih untuk isi nomor </span>
+</div>
+<input type="radio" name="payment" value="Transfer Bank" required>
+</label>
+
+<label class="payment">
+<span class="payment-number">2</span>
+<img src="dana.png" alt="DANA">
+<div>
+<span class="payment-label">DANA</span>
+<span class="payment-small">Pilih untuk isi nomor </span>
+</div>
+<input type="radio" name="payment" value="DANA">
+</label>
+
+<label class="payment">
+<span class="payment-number">3</span>
+<img src="ovo.png" alt="OVO">
+<div>
+<span class="payment-label">OVO</span>
+<span class="payment-small">Pilih untuk isi nomor </span>
+</div>
+<input type="radio" name="payment" value="OVO">
+</label>
+
+<label class="payment">
+<span class="payment-number">4</span>
+<img src="gopay.png" alt="GoPay">
+<div>
+<span class="payment-label">GoPay</span>
+<span class="payment-small">Pilih untuk isi nomor
+</div>
+<input type="radio" name="payment" value="GoPay">
+</label>
+
+<label class="payment">
+<span class="payment-number">5</span>
+<img src="cod.png" alt="COD">
+<div>
+<span class="payment-label">COD</span>
+<span class="payment-small">Bayar di tempat</span>
+</div>
+<input type="radio" name="payment" value="COD">
+</label>
+
+<div id="paymentPhoneWrapper" class="payment-phone">
+<label for="paymentPhone">Nomor Telepon Pembayaran</label>
+<input id="paymentPhone" type="tel" placeholder="0812-xxxx-xxxx" disabled>
+<small id="paymentHelp">Pilih metode pembayaran terlebih dahulu, lalu isi nomor telepon.</small>
+</div>
+
+<button type="submit">Bayar Sekarang</button>
+
+</form>
+</section>
+
+<section id="alamat" class="produk-section">
+
+<h2>Alamat Toko</h2>
+
+<p style="text-align:center">
+JL.Dusun Rowotengu, Desa Ndarungan Semboro, Kab.Jember Jawa Timur
+</p>
+
+</section>
+
+<section id="contact" class="produk-section">
+
+<h2>Contact Person</h2>
+
+<p style="text-align:center">WhatsApp: 082141430355</p>
+<p style="text-align:center">Instagram: mbii_xb</p>
+<p style="text-align:center">Email: mbiiax49@gmail.com</p>
+
+</section>
+
+<script>
+
+let produk="";
+let harga=0;
+let foto="";
+
+function initPaymentListeners(){
+    document.querySelectorAll('input[name="payment"]').forEach(el => {
+        el.addEventListener('change', handlePaymentSelect);
+    });
+}
+
+initPaymentListeners();
+
+function beli(n,h,f){
+
+produk=n;
+harga=h;
+foto=f;
+
+document.getElementById("NamaProduk").innerText=n;
+document.getElementById("HargaProduk").innerText=h.toLocaleString();
+document.getElementById("TotalHarga").innerText=h.toLocaleString();
+document.getElementById("FotoProduk").src=f;
+
+document.getElementById("bayar").style.display="block";
+
+document.getElementById("bayar").scrollIntoView({
+behavior:"smooth"
+});
+}
+
+function handlePaymentSelect(e){
+    const phoneWrapper = document.getElementById('paymentPhoneWrapper');
+    const phoneInput = document.getElementById('paymentPhone');
+    const paymentLabel = e.target.value;
+    phoneWrapper.style.display = 'block';
+    phoneInput.disabled = false;
+    phoneInput.required = true;
+    phoneInput.placeholder = paymentLabel === 'COD' ? '0812-xxxx-xxxx' : '0812-xxxx-xxxx';
+    document.getElementById('paymentHelp').innerText = paymentLabel === 'COD'
+        ? 'Isi nomor penerima untuk konfirmasi pengantaran.'
+        : 'Isi nomor DANA/OVO/GoPay yang digunakan.';
+}
+
+function bayar(e){
+
+    e.preventDefault();
+
+    const nama = document.getElementById('namaPembeli').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+    const warna = document.getElementById('warna').value.trim();
+    const ukuran = document.getElementById('ukuran').value.trim();
+    const payment = document.querySelector('input[name="payment"]:checked');
+    const metode = payment ? payment.value : '';
+    const phone = document.getElementById('paymentPhone').value.trim();
+    const tanggal = new Date().toLocaleDateString('id-ID', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+    });
+    const idTransaksi = 'TRX' + Date.now();
+
+    const strukData = {
+        nama: nama || 'Pembeli',
+        alamat: alamat || '-',
+        warna: warna || '-',
+        ukuran: ukuran || '-',
+        produk: produk || '-',
+        harga: harga || 0,
+        total: harga || 0,
+        metode: metode || '-',
+        telepon: phone || '-',
+        tanggal,
+        idTransaksi,
+        foto: foto || ''
+    };
+
+    localStorage.setItem('strukData', JSON.stringify(strukData));
+
+    alert("PESANAN ANDA TELAH KAMI TERIMA");
+
+
+    window.location.href = 'hasiltransaksi.html';
+}
+
+document.querySelectorAll('input[name="payment"]').forEach(el => {
+    el.addEventListener('change', handlePaymentSelect);
+});
+
+</script>
+</body>
+</html>

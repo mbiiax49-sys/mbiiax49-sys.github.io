@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pesanan Berhasil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #939292;
+        }
+        .container {
+            width: 450px;
+            margin: 40px auto;
+            background: #dddcdc;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+        .product-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 20px auto;
+            display: block;
+
+        }
+        h2 {
+            color: green;
+        }
+        .order-id {
+            margin: 10px 0;
+            font-weight: bold;
+            color: #222222;
+        }
+        .info {
+            margin-top: 15px;
+            color: #1f1e1e;
+        }
+        .product-info {
+            margin: 15px 0;
+            padding: 10px;
+            background: #c1bebe;
+            border-radius: 8px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            background: rgb(226, 82, 82);
+            color: rgb(233, 233, 233);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Gambar ilustrasi -->
+    <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Sukses">
+
+    <h2>Terima Kasih!</h2>
+    <p>Pesanan Anda sedang kami proses.</p>
+
+    <div class="product-info">
+        <h3>Produk yang Dibeli</h3>
+        <img id="produkGambar" class="product-img" src="" alt="Produk">
+        <p><strong>Nama Produk:</strong> <span id="produkNama">-</span></p>
+        <p><strong>Harga:</strong> Rp <span id="produkHarga">-</span></p>
+    </div>
+
+    <div class="order-id">
+        ID Pesanan: <br> <span id="idPesanan">ORD20260414001</span>
+    </div>
+
+    <div class="info">
+        <p>Pesanan Anda sedang diproses dan akan segera dikirim.</p>
+        <p>Silakan tunggu informasi selanjutnya.</p>
+    </div>
+
+    <button onclick="window.location.href='ujikolabtopcaps.html'">Kembali ke Halaman Awal</button>
+</div>
+
+<script>
+    const data = JSON.parse(localStorage.getItem('strukData') || 'null');
+
+    if (data) {
+        document.getElementById('produkGambar').src = data.foto || '';
+        document.getElementById('produkNama').innerText = data.produk || '-';
+        document.getElementById('produkHarga').innerText = Number(data.harga).toLocaleString() || '0';
+        document.getElementById('idPesanan').innerText = data.idTransaksi || 'ORD20260414001';
+    }
+</script>
+
+</body>
+</html>
