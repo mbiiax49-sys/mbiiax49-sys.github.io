@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Transaksi</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 320px;
+            background: #fff;
+            padding: 20px 18px;
+            border-radius: 16px 16px 8px 8px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+            border: 1px solid #d6d6d6;
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 16px;
+            background: #f4f4f4;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 -1px 0 #d6d6d6;
+        }
+        h2 {
+            text-align: center;
+            margin: 0 0 8px;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 14px;
+        }
+        .info {
+            border-top: 1px dashed #bbb;
+            border-bottom: 1px dashed #bbb;
+            padding: 10px 0;
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 13px;
+        }
+        .info p {
+            margin: 4px 0;
+        }
+        .info strong {
+            display: inline-block;
+            width: 90px;
+        }
+        .items {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            color: #222;
+        }
+        .items td,
+        .items th {
+            padding: 6px 0;
+        }
+        .items th {
+            text-align: left;
+            border-bottom: 1px solid #bbb;
+            padding-bottom: 10px;
+        }
+        .items td:nth-child(2),
+        .items th:nth-child(2) {
+            text-align: center;
+            width: 50px;
+        }
+        .items td:nth-child(3),
+        .items th:nth-child(3) {
+            text-align: right;
+            width: 90px;
+        }
+        .line {
+            border-bottom: 1px dashed #bbb;
+            margin: 10px 0;
+        }
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 6px;
+            color: #111;
+        }
+        .note {
+            text-align: center;
+            margin-top: 14px;
+            font-size: 12px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .footer {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+            letter-spacing: 0.4px;
+        }
+        .footer strong {
+            display: block;
+            margin-top: 8px;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>STRUK TRANSAKSI</h2>
+    <div class="subtitle">TopCaps Store</div>
+
+    <div class="info">
+        <p><strong>Nama:</strong> <span id="namaPembeli">-</span></p>
+        <p><strong>Tanggal:</strong> <span id="tanggalTransaksi">-</span></p>
+        <p><strong>ID :</strong> <span id="idTransaksi">-</span></p>
+    </div>
+
+    <table class="items">
+        <tr>
+            <th>Produk</th>
+            <th>Qty</th>
+            <th>Harga</th>
+        </tr>
+        <tr>
+            <td><span id="produkNama">-</span></td>
+            <td>1</td>
+            <td id="produkHarga">Rp0</td>
+        </tr>
+    </table>
+
+    <div class="line"></div>
+
+    <div class="total">
+        <span>Total</span>
+        <span id="totalHarga">Rp0</span>
+    </div>
+
+    <div class="detail">
+        <p><strong>Alamat:</strong> <span id="alamatPembeli">-</span></p>
+        <p><strong>Warna:</strong> <span id="warnaProduk">-</span></p>
+        <p><strong>Ukuran:</strong> <span id="ukuranProduk">-</span></p>
+        <p><strong>Bayar via:</strong> <span id="metodePembayaran">-</span></p>
+    </div>
+
+    <div class="note">
+        TERIMA KASIH ATAS KUNJUNGAN ANDA
+    </div>
+
+    <div class="footer">
+        SIMPAN STRUK INI SEBAGAI BUKTI TRANSAKSI
+        <strong>Transaksi Berhasil ✔</strong>
+    </div>
+</div>
+
+<script>
+    const data = JSON.parse(localStorage.getItem('strukData') || 'null');
+
+    if (data) {
+        document.getElementById('namaPembeli').innerText = data.nama;
+        document.getElementById('tanggalTransaksi').innerText = data.tanggal;
+        document.getElementById('idTransaksi').innerText = data.idTransaksi;
+        document.getElementById('produkNama').innerText = data.produk;
+        document.getElementById('produkHarga').innerText = 'Rp' + Number(data.harga).toLocaleString();
+        document.getElementById('totalHarga').innerText = 'Rp' + Number(data.total).toLocaleString();
+        document.getElementById('alamatPembeli').innerText = data.alamat;
+        document.getElementById('warnaProduk').innerText = data.warna;
+        document.getElementById('ukuranProduk').innerText = data.ukuran;
+        document.getElementById('metodePembayaran').innerText = data.metode;
+    }
+
+    // Auto redirect to halamanakhir.html after 3 seconds
+    setTimeout(() => {
+        window.location.href = 'halamanakhir.html';
+    }, 3000);
+</script>
+
+</body>
+</html>
+</body>
+</html>
