@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TopCaps Sales Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="salesChart" width="400" height="200"></canvas>
+
+<script>
+const ctx = document.getElementById('salesChart').getContext('2d');
+
+const salesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei'],
+        datasets: [{
+            label: 'Penjualan Topi',
+            data: [50, 75, 100, 95, 115],
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Diagram Penjualan TopCaps'
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

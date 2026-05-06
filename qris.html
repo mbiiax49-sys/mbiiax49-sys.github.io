@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QRIS Simulasi</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 50px;
+    }
+    #konfirmasi {
+      display: none;
+    }
+    #qrPage img {
+      display: block;
+      margin: 0 auto;
+      width: 260px;
+      max-width: 100%;
+    }
+    button {
+      margin: 20px auto 0 auto;
+      padding: 10px 20px;
+      cursor: pointer;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="qrPage">
+    <h3>Silakan </h3>
+    <h2>Scan QR Untuk Bayar</h2>
+    
+    <img src="qris.png" alt="QRIS" />
+
+
+
+    <button onclick="konfirmasiPembayaran()">Bayar</button>
+  </div>
+
+  <div id="konfirmasi">
+    <h2>OK</h2>
+    <p>Pembayaran berhasil dikonfirmasi</p>
+    <p>Silakan tunggu... sedang dialihkan ke halaman transaksi.</p>
+    <h3>terima kasih!</h3>
+  </div>
+
+  <script>
+    function konfirmasiPembayaran() {
+      document.getElementById("qrPage").style.display = "none";
+      document.getElementById("konfirmasi").style.display = "block";
+      setTimeout(() => {
+        window.location.href = 'hasiltransaksi.html';
+      }, 1200);
+    }
+  </script>
+
+</body>
+</html>

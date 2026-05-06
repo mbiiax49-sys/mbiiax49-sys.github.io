@@ -116,6 +116,59 @@
             margin-top: 8px;
             color: #000;
         }
+        .rating-box {
+            margin-top: 18px;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #fafafa;
+        }
+        .rating-box h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #222;
+        }
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .rating-stars button {
+            width: 42px;
+            height: 42px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .rating-stars button.selected,
+        .rating-stars button:hover {
+            background: #f8d64f;
+            transform: translateY(-2px);
+        }
+        #submitRating {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2176ff;
+            color: #fff;
+            cursor: pointer;
+        }
+        #submitRating:disabled {
+            background: #a0bfff;
+            cursor: default;
+        }
+        #ratingMessage {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 13px;
+            color: #226633;
+        }
 
     </style>
 </head>
@@ -158,6 +211,19 @@
         <p><strong>Bayar via:</strong> <span id="metodePembayaran">-</span></p>
     </div>
 
+    <div class="rating-box">
+        <h3>Berikan Rating untuk Produk Anda</h3>
+        <div class="rating-stars">
+            <button type="button" data-score="1">★</button>
+            <button type="button" data-score="2">★</button>
+            <button type="button" data-score="3">★</button>
+            <button type="button" data-score="4">★</button>
+            <button type="button" data-score="5">★</button>
+        </div>
+        <button id="submitRating" type="button" disabled>Kirim Rating</button>
+        <p id="ratingMessage">Pilih bintang lalu kirim rating Anda.</p>
+    </div>
+
     <div class="note">
         TERIMA KASIH ATAS KUNJUNGAN ANDA
     </div>
@@ -184,13 +250,60 @@
         document.getElementById('metodePembayaran').innerText = data.metode;
     }
 
-    // Auto redirect to halamanakhir.html after 3 seconds
-    setTimeout(() => {
+    const ratingButtons = document.querySelectorAll('.rating-stars button');
+    const submitRating = document.getElementById('submitRating');
+    const ratingMessage = document.getElementById('ratingMessage');
+    let selectedScore = 0;
+    let redirectTimeout;
+
+    ratingButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedScore = Number(button.getAttribute('data-score'));
+            ratingButtons.forEach(btn => btn.classList.toggle('selected', btn === button || Number(btn.getAttribute('data-score')) <= selectedScore));
+            submitRating.disabled = false;
+            ratingMessage.innerText = `Anda memberi ${selectedScore} bintang. Tekan Kirim Rating untuk menyimpan penilaian.`;
+        });
+    });
+
+    function getRatings() {
+        const saved = localStorage.getItem('productRatings');
+        return saved ? JSON.parse(saved) : {};
+    }
+
+    function saveRatings(ratings) {
+        localStorage.setItem('productRatings', JSON.stringify(ratings));
+    }
+
+    function submitProductRating() {
+        if (!data || !selectedScore || !data.produk) return;
+        const ratings = getRatings();
+        const productName = data.produk;
+
+        if (!ratings[productName]) {
+            ratings[productName] = { rating: selectedScore, reviewCount: 1 };
+        } else {
+            const product = ratings[productName];
+            const totalReviews = product.reviewCount || 0;
+            const totalScore = (product.rating || 0) * totalReviews;
+            product.reviewCount = totalReviews + 1;
+            product.rating = (totalScore + selectedScore) / product.reviewCount;
+        }
+
+        saveRatings(ratings);
+        submitRating.disabled = true;
+        ratingMessage.innerText = 'Terima kasih! Rating Anda telah tersimpan.';
+        clearTimeout(redirectTimeout);
+        redirectTimeout = setTimeout(() => {
+            window.location.href = 'halamanakhir.html';
+        }, 2500);
+    }
+
+    submitRating.addEventListener('click', submitProductRating);
+
+    redirectTimeout = setTimeout(() => {
         window.location.href = 'halamanakhir.html';
-    }, 3000);
+    }, 22000);
 </script>
 
-</body>
-</html>
 </body>
 </html>

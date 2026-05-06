@@ -48,6 +48,13 @@
             background: #c1bebe;
             border-radius: 8px;
         }
+        .stats {
+            margin: 15px 0;
+            padding: 10px;
+            background: #b8b5b5;
+            border-radius: 8px;
+            font-size: 14px;
+        }
         button {
             margin-top: 20px;
             padding: 10px 15px;
@@ -75,6 +82,12 @@
         <p><strong>Harga:</strong> Rp <span id="produkHarga">-</span></p>
     </div>
 
+    <div class="stats">
+        <strong>Statistik Toko:</strong><br>
+        Total Pengunjung: <span id="visitorCount">0</span> |
+        Total Terjual: <span id="salesCount">0</span> produk
+    </div>
+
     <div class="order-id">
         ID Pesanan: <br> <span id="idPesanan">ORD20260414001</span>
     </div>
@@ -96,6 +109,12 @@
         document.getElementById('produkHarga').innerText = Number(data.harga).toLocaleString() || '0';
         document.getElementById('idPesanan').innerText = data.idTransaksi || 'ORD20260414001';
     }
+
+    // Display counters
+    const visitors = localStorage.getItem('totalVisitors') || 0;
+    const sales = JSON.parse(localStorage.getItem('salesData') || '[]');
+    document.getElementById('visitorCount').innerText = parseInt(visitors).toLocaleString();
+    document.getElementById('salesCount').innerText = sales.length;
 </script>
 
 </body>

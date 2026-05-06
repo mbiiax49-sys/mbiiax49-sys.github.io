@@ -1,548 +1,1166 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TopCaps Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopCaps Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-body{
-margin:0;
-font-family:Arial;
-background-image:url(wp1.png);
-background-size:contain;
-}
+        body {
+            margin: 0;
+            font-family: Arial;
+            background-image: url(wp1.png);
+            background-size: contain;
+        }
 
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 50px;
-background:#858282;
-color:white;
-}
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 50px;
+            background: #858282;
+            color: white;
+        }
 
-nav ul{
-list-style:none;
-display:flex;
-gap:25px;
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
 
-nav ul li a{
-text-decoration:none;
-color:white;
-}
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
 
-.hero{
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:80px 50px;
-}
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 50px;
+        }
 
-.hero-text{
-max-width:480px;
-}
+        .hero-text {
+            max-width: 480px;
+        }
 
-.hero-text h1{
-font-size:50px;
-color:#e8e4e4;
-}
+        .hero-text h1 {
+            font-size: 50px;
+            color: #e8e4e4;
+        }
 
-.hero-text p{
-color:#cfcbcb;
-margin:20px 0;
-}
+        .hero-text p {
+            color: #cfcbcb;
+            margin: 20px 0;
+        }
 
-.hero-text button{
-padding:12px 22px;
-background:#db4545;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-}
+        .hero-text button {
+            padding: 12px 22px;
+            background: #db4545;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
 
-.produk-section{
-padding: 55px;
-background:#454446;
-}
+        .produk-section {
+            padding: 55px;
+            background: #454446;
+        }
 
-.produk-section h2{
-text-align:center;
-color:white;
-margin-bottom:40px;
-}
+        .produk-section h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
 
-.produk{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:30px;
-}
+        .diagram-card {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px;
+            background: #fafafa;
+            border-radius: 24px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+        }
 
-.card{
-background:#cdcdcd;
-padding:10px;
-border-radius:15px;
-text-align:center;
-}
+        .diagram-card canvas {
+            width: 100% !important;
+            height: 320px !important;
+        }
 
-.card img{
-width:120px;
-height:110px;
-object-fit:cover;
-border-radius:10px;
-}
+        .produk {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
 
-.card p{
-font-size:14px;
-line-height:1.45;
-margin:10px 0;
-color:#444343;
-}
+        .card {
+            background: #cdcdcd;
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+        }
 
-.card strong{
-display:block;
-margin:10px 0;
-color:#862424;
-}
+        .card img {
+            width: 120px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
-.card button{
-background:#d45252;
-color:white;
-border:none;
-padding:8px 14px;
-border-radius:5px;
-cursor:pointer;
-}
+        .card p {
+            font-size: 14px;
+            line-height: 1.45;
+            margin: 10px 0;
+            color: #444343;
+        }
 
-#bayar{
-display:none;
-}
+        .card strong {
+            display: block;
+            margin: 10px 0;
+            color: #862424;
+        }
 
-form input, form textarea{
-width:100%;
-padding:8px;
-margin-bottom:12px;
-}
+        .card button {
+            background: #d45252;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-form button{
-width:100%;
-padding:10px;
-background:#e1624c;
-color:white;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
+        .rating {
+            color: #f5c518;
+            font-size: 16px;
+            margin: 8px 0 4px;
+        }
 
-.payment{
-display:grid;
-grid-template-columns:36px 40px 1fr auto;
-align-items:center;
-gap:10px;
-margin:8px 0;
-padding:10px 12px;
-border:1px solid rgba(255,255,255,0.18);
-border-radius:12px;
-background:rgba(255,255,255,0.08);
-}
+        .rating span {
+            color: #888;
+            font-size: 12px;
+            margin-left: 5px;
+        }
 
-.payment input{
-width:18px;
-height:18px;
-margin:0;
-accent-color:#e1624c;
-}
+        .review-count {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
 
-.payment img{
-width:34px;
-height:34px;
-object-fit:contain;
-}
+        .deskripsi-card {
+            background: #f7f5f5;
+            padding: 20px;
+            border-radius: 15px;
+            color: #2d2d2d;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-.payment-number{
-width:30px;
-height:30px;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#e1624c;
-color:#fff;
-border-radius:50%;
-font-size:12px;
-font-weight:700;
-}
+        .deskripsi-card h3 {
+            margin-top: 0;
+            color: #861f1f;
+        }
 
-.payment-label{
-font-size:14px;
-font-weight:700;
-color:#222;
-}
+        .deskripsi-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(180px, 1fr));
+            gap: 10px;
+        }
 
-.payment-small{
-font-size:12px;
-color:#ccc;
-margin-top:4px;
-}
+        .deskripsi-card ul li {
+            padding: 10px;
+            background: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
 
-.payment-phone{
-display:none;
-margin:12px 0 0;
-padding:10px 12px;
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.18);
-border-radius:12px;
-}
+        #bayar {
+            display: none;
+        }
 
-.payment-phone label{
-display:block;
-margin-bottom:6px;
-font-size:13px;
-color:#fff;
-}
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
 
-.payment-phone input{
-width:100%;
-padding:10px;
-border:1px solid #ccc;
-border-radius:6px;
-background:#fff;
-color:#222;
-}
+        form button {
+            width: 100%;
+            padding: 10px;
+            background: #e1624c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.payment-phone small{
-display:block;
-margin-top:6px;
-font-size:12px;
-color:#ddd;
-}
-#contact a {
-	color: #fff;
-	text-decoration: none;
-}
+        .payment {
+            display: grid;
+            grid-template-columns: 36px 40px 1fr auto;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            padding: 10px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+        }
 
-#contact a:hover {
-	text-decoration: underline;
-}
-</style>
+        .payment input {
+            width: 18px;
+            height: 18px;
+            margin: 0;
+            accent-color: #e1624c;
+        }
+
+        .payment img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+        }
+
+        .payment-number {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e1624c;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .payment-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .payment-small {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 4px;
+        }
+
+        .payment-phone {
+            display: none;
+            margin: 12px 0 0;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 12px;
+        }
+
+        .payment-phone label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        .payment-phone input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fff;
+            color: #222;
+        }
+
+        .payment-phone small {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px;
+            color: #ddd;
+        }
+
+        #FotoProduk {
+            transition: transform 0.3s ease;
+            cursor: grab;
+        }
+
+        #FotoProduk:active {
+            cursor: grabbing;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            width: 90%;
+            max-width: 600px;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 5%;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .close {
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            color: #f1f1f1;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+        }
+
+        #contact a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
-<h2>TopCaps Store</h2>
-
-<ul>
-<li><a href="#beranda">Beranda</a></li>
-<li><a href="#produk">Produk</a></li>
-<li><a href="#alamat">Alamat</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-</nav>
-
-
-<section id="beranda" class="hero">
-
-<div class="hero-text">
-<h1>TOPCAPS</h1>
-
-<p>Menyediakan berbagai topi berkualitas dan stylish dengan model snapback, baseball cap, bucket hat, dan berbagai topi kekinian.</p>
-
-<button onclick="document.getElementById('produk').scrollIntoView()">
-Lihat Semua Produk
-</button>
-
-</div>
-
-</section>
-
-
-<section id="produk" class="produk-section">
-
-<h2>Produk Unggulan</h2>
-
-<div class="produk">
-
-<div class="card">
-<img src="produk5.png">
-<h3>Topi CHBM</h3>
-<p>Topi bergaya biker/street fashion, cocok untuk tampilan santai dan keren sehari-hari</p>
-<strong>Rp 150.000</strong>
-<button type="button" onclick="beli('Topi CHBM',155000,'produk5.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="prodk4.png">
-<h3>Topi Delibra</h3>
-<p>Desain sporty dan modern, nyaman dipakai untuk aktivitas outdoor maupun kasual</p>
-<strong>Rp 175.000</strong>
-<button type="button" onclick="beli('Topi Delibra',178000,'prodk4.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="prodk6.png">
-<h3>Topi Polo</h3>
-<p>Model elegan dan stylish, cocok untuk tampilan rapi namun tetap santai</p>
-<strong>Rp 188.000</strong>
-<button type="button" onclick="beli('Topi Polo',190000,'prodk6.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="produk3.png">
-<h3>Topi Nike</h3>
-<p>Gaya casual streetwear, ringan dan cocok untuk aktivitas harian</p>
-<strong>Rp195.000</strong>
-<button type="button" onclick="beli('Topi Nike',198000,'produk3.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="produk8.png">
-<h3>Topi NY</h3>
-<p>Desain simpel dan elegan, mudah dipadukan dengan berbagai outfit</p>
-<strong>Rp 280.000</strong>
-<button type="button" onclick="beli('Topi NY',300000,'produk8.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="prodk2.png">
-<h3>Topi Puma</h3>
-<p>Style sporty dan street fashion, memberikan kesan aktif dan trendy</p>
-<strong>Rp 350.000</strong>
-<button type="button" onclick="beli('Topi Puma',390000,'prodk2.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="produk10.png">
-<h3>Topi Adidas</h3>
-<p>Desain klasik dengan nuansa street style, nyaman dan fashionable</p>
-<strong>Rp 440.000</strong>
-<button type="button" onclick="beli('Topi Adidas',490000,'produk10.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="produkk9.png">
-<h3>Topi Stone Island</h3>
-<p>Tampilan premium dengan gaya street fashion, cocok untuk look eksklusif</p>
-<strong>Rp 530.000</strong>
-<button type="button" onclick="beli('Topi Stone Island',580000,'produkk9.png')">Beli</button>
-</div>
-
-<div class="card">
-<img src="prodk7.png">
-<h3>Topi Rucas</h3>
-<p>Desain unik dengan sentuhan street style, cocok untuk tampil beda dan percaya diri</p>
-<strong>Rp 688.000</strong>
-<button type="button" onclick="beli('Topi Rucas',690000,'prodk7.png')">Beli</button>
-</div>
-
-</div>
-</section>
-
-<section id="bayar" class="produk-section">
-
-<h2>Form Pembayaran</h2>
-
-<p><strong>Produk:</strong> <span id="NamaProduk"></span></p>
-
-<div class="card">
-
-<img id="FotoProduk" width="150">
-
-<p><strong>Harga:</strong> Rp <span id="HargaProduk"></span></p>
-
-<p><strong>Total:</strong> Rp <span id="TotalHarga"></span></p>
-
-</div>
-
-<form onsubmit="bayar(event)">
-
-<label>Nama Lengkap</label>
-<input id="namaPembeli" type="text" placeholder="Nama lengkap" required>
-
-<label>Alamat Lengkap</label>
-<textarea id="alamat" required></textarea>
-
-<label>Warna</label>
-<input id="warna" type="text" placeholder="HITAM, ABU-ABU, PUTIH, NAVY" required>
-
-<label>Ukuran</label>
-<input id="ukuran" type="text" placeholder="S / M / L" required>
-
-<h3>Pilih Metode Pembayaran</h3>
-
-<label class="payment">
-<span class="payment-number">1</span>
-<img src="bank.png" alt="Transfer Bank">
-<div>
-<span class="payment-label">Transfer Bank</span>
-<span class="payment-small">Pilih untuk isi nomor </span>
-</div>
-<input type="radio" name="payment" value="Transfer Bank" required>
-</label>
-
-<label class="payment">
-<span class="payment-number">2</span>
-<img src="dana.png" alt="DANA">
-<div>
-<span class="payment-label">DANA</span>
-<span class="payment-small">Pilih untuk isi nomor </span>
-</div>
-<input type="radio" name="payment" value="DANA">
-</label>
-
-<label class="payment">
-<span class="payment-number">3</span>
-<img src="ovo.png" alt="OVO">
-<div>
-<span class="payment-label">OVO</span>
-<span class="payment-small">Pilih untuk isi nomor </span>
-</div>
-<input type="radio" name="payment" value="OVO">
-</label>
-
-<label class="payment">
-<span class="payment-number">4</span>
-<img src="gopay.png" alt="GoPay">
-<div>
-<span class="payment-label">GoPay</span>
-<span class="payment-small">Pilih untuk isi nomor
-</div>
-<input type="radio" name="payment" value="GoPay">
-</label>
-
-<label class="payment">
-<span class="payment-number">5</span>
-<img src="cod.png" alt="COD">
-<div>
-<span class="payment-label">COD</span>
-<span class="payment-small">Bayar di tempat</span>
-</div>
-<input type="radio" name="payment" value="COD">
-</label>
-
-<div id="paymentPhoneWrapper" class="payment-phone">
-<label for="paymentPhone">Nomor Telepon Pembayaran</label>
-<input id="paymentPhone" type="tel" placeholder="0812-xxxx-xxxx" disabled>
-<small id="paymentHelp">Pilih metode pembayaran terlebih dahulu, lalu isi nomor telepon.</small>
-</div>
-
-<button type="submit">Bayar Sekarang</button>
-
-</form>
-</section>
-
-<section id="alamat" class="produk-section">
-
-<h2>Alamat Toko</h2>
-
-<p style="text-align:center">
-JL.Dusun Rowotengu, Desa Ndarungan Semboro, Kab.Jember Jawa Timur
-</p>
-
-</section>
-
-<section id="contact" class="produk-section">
-
-<h2>Contact Person</h2>
-
-<p style="text-align:center"><a href="https://wa.me/082141430355" target="_blank" style="color: black;">WhatsApp: 082141430355</a></p>
-<p style="text-align:center"><a href="https://www.instagram.com/mbii_xb" target="_blank" style="color: black;">Instagram: mbii_xb</a></p>
-<p style="text-align:center">Email: mbiiax49@gmail.com</p>
-
-</section>
-
-<script>
-
-let produk="";
-let harga=0;
-let foto="";
-
-function initPaymentListeners(){
-    document.querySelectorAll('input[name="payment"]').forEach(el => {
-        el.addEventListener('change', handlePaymentSelect);
-    });
-}
-
-initPaymentListeners();
-
-function beli(n,h,f){
-
-produk=n;
-harga=h;
-foto=f;
-
-document.getElementById("NamaProduk").innerText=n;
-document.getElementById("HargaProduk").innerText=h.toLocaleString();
-document.getElementById("TotalHarga").innerText=h.toLocaleString();
-document.getElementById("FotoProduk").src=f;
-
-document.getElementById("bayar").style.display="block";
-
-document.getElementById("bayar").scrollIntoView({
-behavior:"smooth"
-});
-}
-
-function handlePaymentSelect(e){
-    const phoneWrapper = document.getElementById('paymentPhoneWrapper');
-    const phoneInput = document.getElementById('paymentPhone');
-    const paymentLabel = e.target.value;
-    phoneWrapper.style.display = 'block';
-    phoneInput.disabled = false;
-    phoneInput.required = true;
-    phoneInput.placeholder = paymentLabel === 'COD' ? '0812-xxxx-xxxx' : '0812-xxxx-xxxx';
-    document.getElementById('paymentHelp').innerText = paymentLabel === 'COD'
-        ? 'Isi nomor penerima untuk konfirmasi pengantaran.'
-        : 'Isi nomor DANA/OVO/GoPay yang digunakan.';
-}
-
-function bayar(e){
-
-    e.preventDefault();
-
-    const nama = document.getElementById('namaPembeli').value.trim();
-    const alamat = document.getElementById('alamat').value.trim();
-    const warna = document.getElementById('warna').value.trim();
-    const ukuran = document.getElementById('ukuran').value.trim();
-    const payment = document.querySelector('input[name="payment"]:checked');
-    const metode = payment ? payment.value : '';
-    const phone = document.getElementById('paymentPhone').value.trim();
-    const tanggal = new Date().toLocaleDateString('id-ID', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-    });
-    const idTransaksi = 'TRX' + Date.now();
-
-    const strukData = {
-        nama: nama || 'Pembeli',
-        alamat: alamat || '-',
-        warna: warna || '-',
-        ukuran: ukuran || '-',
-        produk: produk || '-',
-        harga: harga || 0,
-        total: harga || 0,
-        metode: metode || '-',
-        telepon: phone || '-',
-        tanggal,
-        idTransaksi,
-        foto: foto || ''
-    };
-
-    localStorage.setItem('strukData', JSON.stringify(strukData));
-
-    alert("PESANAN ANDA TELAH KAMI TERIMA");
-
-
-    window.location.href = 'hasiltransaksi.html';
-}
-
-document.querySelectorAll('input[name="payment"]').forEach(el => {
-    el.addEventListener('change', handlePaymentSelect);
-});
-
-</script>
+    <nav>
+        <h2>TopCaps Store</h2>
+
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#alamat">Alamat</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
+
+
+    <section id="beranda" class="hero">
+
+        <div class="hero-text">
+            <h1>TOPCAPS</h1>
+
+            <p>Menyediakan berbagai topi berkualitas dan stylish dengan model snapback, baseball cap, bucket hat, dan
+                berbagai topi kekinian.</p>
+
+            <button onclick="document.getElementById('produk').scrollIntoView()">
+                Lihat Semua Produk
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <section id="produk" class="produk-section">
+
+        <h2>Produk Unggulan</h2>
+
+        <div class="produk">
+
+            <div class="card" data-product="Topi CHBM">
+                <img src="produk5.png">
+                <h3>Topi CHBM</h3>
+                <div class="rating">★★★★☆<span>4.5</span></div>
+                <div class="review-count">120 Ulasan</div>
+                <p>Topi bergaya biker/street fashion, cocok untuk tampilan santai dan keren sehari-hari</p>
+                <strong>Rp 150.000</strong>
+                <button type="button" onclick="beli('Topi CHBM',155000,'produk5.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Delibra">
+                <img src="prodk4.png">
+                <h3>Topi Delibra</h3>
+                <div class="rating">★★★★★<span>5.0</span></div>
+                <div class="review-count">85 Ulasan</div>
+                <p>Desain sporty dan modern, nyaman dipakai untuk aktivitas outdoor maupun kasual</p>
+                <strong>Rp 175.000</strong>
+                <button type="button" onclick="beli('Topi Delibra',178000,'prodk4.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Polo">
+                <img src="prodk6.png">
+                <h3>Topi Polo</h3>
+                <div class="rating">★★★★☆<span>4.2</span></div>
+                <div class="review-count">92 Ulasan</div>
+                <p>Model elegan dan stylish, cocok untuk tampilan rapi namun tetap santai</p>
+                <strong>Rp 188.000</strong>
+                <button type="button" onclick="beli('Topi Polo',190000,'prodk6.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Nike">
+                <img src="produk3.png">
+                <h3>Topi Nike</h3>
+                <div class="rating">★★★★★<span>4.8</span></div>
+                <div class="review-count">210 Ulasan</div>
+                <p>Gaya casual streetwear, ringan dan cocok untuk aktivitas harian</p>
+                <strong>Rp195.000</strong>
+                <button type="button" onclick="beli('Topi Nike',198000,'produk3.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi NY">
+                <img src="produk8.png">
+                <h3>Topi NY</h3>
+                <div class="rating">★★★★☆<span>4.6</span></div>
+                <div class="review-count">156 Ulasan</div>
+                <p>Desain simpel dan elegan, mudah dipadukan dengan berbagai outfit</p>
+                <strong>Rp 280.000</strong>
+                <button type="button" onclick="beli('Topi NY',300000,'produk8.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Puma">
+                <img src="prodk2.png">
+                <h3>Topi Puma</h3>
+                <div class="rating">★★★★☆<span>4.3</span></div>
+                <div class="review-count">78 Ulasan</div>
+                <p>Style sporty dan street fashion, memberikan kesan aktif dan trendy</p>
+                <strong>Rp 350.000</strong>
+                <button type="button" onclick="beli('Topi Puma',390000,'prodk2.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Adidas">
+                <img src="produk10.png">
+                <h3>Topi Adidas</h3>
+                <div class="rating">★★★★★<span>4.9</span></div>
+                <div class="review-count">245 Ulasan</div>
+                <p>Desain klasik dengan nuansa street style, nyaman dan fashionable</p>
+                <strong>Rp 440.000</strong>
+                <button type="button" onclick="beli('Topi Adidas',490000,'produk10.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Stone Island">
+                <img src="produkk9.png">
+                <h3>Topi Stone Island</h3>
+                <div class="rating">★★★★★<span>5.0</span></div>
+                <div class="review-count">62 Ulasan</div>
+                <p>Tampilan premium dengan gaya street fashion, cocok untuk look eksklusif</p>
+                <strong>Rp 530.000</strong>
+                <button type="button" onclick="beli('Topi Stone Island',580000,'produkk9.png')">Beli</button>
+            </div>
+
+            <div class="card" data-product="Topi Rucas">
+                <img src="prodk7.png">
+                <h3>Topi Rucas</h3>
+                <div class="rating">★★★★☆<span>4.4</span></div>
+                <div class="review-count">48 Ulasan</div>
+                <p>Desain unik dengan sentuhan street style, cocok untuk tampil beda dan percaya diri</p>
+                <strong>Rp 688.000</strong>
+                <button type="button" onclick="beli('Topi Rucas',690000,'prodk7.png')">Beli</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="deskripsi" class="produk-section">
+
+        <h2>Deskripsi Produk</h2>
+
+        <div class="deskripsi-card" id="deskripsiProduk">
+            <h3 id="deskripsiJudul">Pilih Produk untuk Melihat Deskripsi</h3>
+            <p id="deskripsiTeks">Setiap topi memiliki tampilan, bahan, dan detail gaya yang berbeda. Klik tombol Beli
+                pada produk pilihan untuk melihat deskripsi lengkapnya.</p>
+            <ul id="deskripsiList">
+                <li><strong>Bahan:</strong> -</li>
+                <li><strong>Stok:</strong> -</li>
+                <li><strong>Merek:</strong> -</li>
+                <li><strong>Negara Asal:</strong> -</li>
+                <li><strong>Gaya Topi:</strong> -</li>
+                <li><strong>Jenis Kelamin:</strong> -</li>
+                <li><strong>Produk Custom:</strong> -</li>
+                <li><strong>Mystery Box:</strong> -</li>
+                <li><strong>Jenis Kulit:</strong> -</li>
+                <li><strong>Dikirim Dari:</strong> -</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section id="bayar" class="produk-section">
+
+        <h2>Form Pembayaran</h2>
+
+        <p><strong>Produk:</strong> <span id="NamaProduk"></span></p>
+
+        <div class="card">
+
+            <img id="FotoProduk" width="150">
+
+            <p><strong>Harga:</strong> Rp <span id="HargaProduk"></span></p>
+
+            <p><strong>Total:</strong> Rp <span id="TotalHarga"></span></p>
+
+        </div>
+
+        <form onsubmit="bayar(event)">
+
+            <label>Nama Lengkap</label>
+            <input id="namaPembeli" type="text" placeholder="Nama lengkap" required>
+
+            <label>Alamat Lengkap</label>
+            <textarea id="alamatPembeli" required></textarea>
+
+            <label>Warna</label>
+            <div id="warna-group" class="pilihan-group">
+                <button type="button" class="warna-btn" data-value="Hitam">Hitam</button>
+                <button type="button" class="warna-btn" data-value="Abu-abu">Abu-abu</button>
+                <button type="button" class="warna-btn" data-value="Putih">Putih</button>
+                <button type="button" class="warna-btn" data-value="Navy">Navy</button>
+            </div>
+            <input id="warna" name="warna" type="hidden" required>
+
+            <label>Ukuran</label>
+            <div id="ukuran-group" class="pilihan-group">
+                <button type="button" class="ukuran-btn" data-value="S">S (54-55cm)</button>
+                <button type="button" class="ukuran-btn" data-value="M">M (56-57cm)</button>
+                <button type="button" class="ukuran-btn" data-value="L">L (58-60cm)</button>
+            </div>
+            <input id="ukuran" name="ukuran" type="hidden" required>
+
+            <h3>Pilih Metode Pembayaran</h3>
+
+            <label class="payment">
+                <span class="payment-number">1</span>
+                <img src="bank.png" alt="Transfer Bank">
+                <div>
+                    <span class="payment-label">Transfer Bank</span>
+                    <span class="payment-small">Pilih untuk isi nomor </span>
+                </div>
+                <input type="radio" name="payment" value="Transfer Bank" required>
+            </label>
+
+            <label class="payment">
+                <span class="payment-number">2</span>
+                <img src="dana.png" alt="DANA">
+                <div>
+                    <span class="payment-label">DANA</span>
+                    <span class="payment-small">Pilih untuk isi nomor </span>
+                </div>
+                <input type="radio" name="payment" value="DANA">
+            </label>
+
+            <label class="payment">
+                <span class="payment-number">3</span>
+                <img src="ovo.png" alt="OVO">
+                <div>
+                    <span class="payment-label">OVO</span>
+                    <span class="payment-small">Pilih untuk isi nomor </span>
+                </div>
+                <input type="radio" name="payment" value="OVO">
+            </label>
+
+            <label class="payment">
+                <span class="payment-number">4</span>
+                <img src="gopay.png" alt="GoPay">
+                <div>
+                    <span class="payment-label">GoPay</span>
+                    <span class="payment-small">Pilih untuk isi nomor
+                </div>
+                <input type="radio" name="payment" value="GoPay">
+            </label>
+
+            <label class="payment">
+                <span class="payment-number">5</span>
+                <img src="cod.png" alt="COD">
+                <div>
+                    <span class="payment-label">COD</span>
+                    <span class="payment-small">Bayar di tempat</span>
+                </div>
+                <input type="radio" name="payment" value="COD">
+            </label>
+
+            <div id="paymentPhoneWrapper" class="payment-phone">
+                <label for="paymentPhone">Nomor Telepon Pembayaran</label>
+                <input id="paymentPhone" type="tel" placeholder="0812-xxxx-xxxx" disabled>
+                <small id="paymentHelp">Pilih metode pembayaran terlebih dahulu, lalu isi nomor telepon.</small>
+            </div>
+
+            <button type="submit">Bayar Sekarang</button>
+
+        </form>
+    </section>
+
+    <section id="diagram" class="produk-section">
+        <h2>Diagram Penjualan</h2>
+        <div class="diagram-card">
+            <canvas id="salesChart"></canvas>
+            <p id="totalSalesCount" style="margin-top: 18px; text-align: center; color: #444; font-weight: 700;">Total Penjualan: 0</p>
+        </div>
+    </section>
+
+    <section id="alamat" class="produk-section">
+
+        <h2>Alamat Toko</h2>
+
+        <p style="text-align:center">
+            JL.Dusun Rowotengu, Desa Ndarungan Semboro, Kab.Jember Jawa Timur
+        </p>
+
+    </section>
+
+    <div id="zoomModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeZoom()">&times;</span>
+            <img id="zoomImage" class="modal-image">
+        </div>
+    </div>
+
+    <section id="kontak" class="produk-section">
+
+        <h2>Kontak</h2>
+
+        <p style="text-align:center"><a href="https://wa.me/082141430355" target="_blank"
+                style="color: black;">WhatsApp: 082141430355</a></p>
+        <p style="text-align:center"><a href="https://www.instagram.com/mbii_xb" target="_blank"
+                style="color: black;">Instagram: mbii_xb</a></p>
+        <p style="text-align:center">Email: mbiiax49@gmail.com</p>
+        <p style="text-align:center; margin-top: 30px; font-size: 14px; color: #eae7e7;">
+            Total Pengunjung: <span id="visitorCount" style="font-weight: bold; color: #cac7c7;">0</span>
+        </p>
+
+    </section>
+
+    <style>
+        .pilihan-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .warna-btn,
+        .ukuran-btn {
+            border: 2px solid #b1b0b0;
+            background: #fff;
+            color: #222;
+            border-radius: 8px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s, border 0.2s;
+        }
+
+        .warna-btn.selected,
+        .ukuran-btn.selected {
+            background: #b0aeae;
+            color: #fff;
+            border: 2px solid #dbdbdc;
+        }
+    </style>
+
+    <script>
+
+
+        function initVisitorCounter() {
+            let visitCount = localStorage.getItem('visitorCount');
+            
+            if (!visitCount) {
+                visitCount = 150;
+            } else {
+                visitCount = parseInt(visitCount) + 1;
+            }
+            
+            localStorage.setItem('visitorCount', visitCount);
+            document.getElementById('visitorCount').innerText = visitCount.toLocaleString('id-ID');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initVisitorCounter);
+        } else {
+            initVisitorCounter();
+        }
+
+        const defaultRatings = {
+            'Topi CHBM': { rating: 4.5, Terjual: 120, reviewCount: 120 },
+            'Topi Delibra': { rating: 5.0, Terjual: 85, reviewCount: 85 },
+            'Topi Polo': { rating: 4.2, Terjual: 92, reviewCount: 92 },
+            'Topi Nike': { rating: 4.8, Terjual: 210, reviewCount: 210 },
+            'Topi NY': { rating: 4.6, Terjual: 156, reviewCount: 156 },
+            'Topi Puma': { rating: 4.3, Terjual: 78, reviewCount: 78 },
+            'Topi Adidas': { rating: 4.9, Terjual: 245, reviewCount: 245 },
+            'Topi Stone Island': { rating: 5.0, Terjual: 62, reviewCount: 62 },
+            'Topi Rucas': { rating: 4.9, Terjual: 48, reviewCount: 48 }
+        };
+
+        function getRatings() {
+            const saved = localStorage.getItem('productRatings');
+            const ratings = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultRatings));
+
+            Object.entries(defaultRatings).forEach(([name, defaultData]) => {
+                if (!ratings[name]) {
+                    ratings[name] = { ...defaultData };
+                } else {
+                    if (typeof ratings[name].rating !== 'number') ratings[name].rating = defaultData.rating;
+                    if (typeof ratings[name].Terjual !== 'number') ratings[name].Terjual = defaultData.Terjual;
+                    if (typeof ratings[name].reviewCount !== 'number') ratings[name].reviewCount = defaultData.reviewCount;
+                }
+            });
+
+            return ratings;
+        }
+
+        function saveRatings(data) {
+            localStorage.setItem('productRatings', JSON.stringify(data));
+        }
+
+        function getStarHtml(rating) {
+            const filledCount = Math.round(rating);
+            const filledStars = '★'.repeat(filledCount);
+            const emptyStars = '☆'.repeat(5 - filledCount);
+            return `${filledStars}${emptyStars}`;
+        }
+
+        function updateRatingDisplay() {
+            const ratings = getRatings();
+            for (const [product, data] of Object.entries(ratings)) {
+                const card = document.querySelector(`[data-product="${product}"]`);
+                if (card) {
+                    const ratingEl = card.querySelector('.rating');
+                    const reviewEl = card.querySelector('.review-count');
+                    if (ratingEl && reviewEl) {
+                        ratingEl.innerHTML = `${getStarHtml(data.rating)}<span>${data.rating.toFixed(1)}</span>`;
+                        reviewEl.textContent = `${data.Terjual} Terjual`;
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateRatingDisplay);
+
+        function saveProductRating(productName, score) {
+            const ratings = getRatings();
+            if (!ratings[productName]) {
+                ratings[productName] = { rating: score, reviewCount: 1 };
+            } else {
+                const info = ratings[productName];
+                const totalReviews = info.reviewCount || 0;
+                const existingTotal = (info.rating || 0) * totalReviews;
+                info.reviewCount = totalReviews + 1;
+                info.rating = (existingTotal + score) / info.reviewCount;
+            }
+            saveRatings(ratings);
+            updateRatingDisplay();
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            document.querySelectorAll('.warna-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.warna-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    document.getElementById('warna').value = btn.getAttribute('data-value');
+                });
+            });
+
+            document.querySelectorAll('.ukuran-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.ukuran-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    document.getElementById('ukuran').value = btn.getAttribute('data-value');
+                });
+            });
+        });
+
+        const productDetails = {
+            'Topi CHBM': {
+                bahan: 'Kulit sintetis berkualitas',
+                stok: '37',
+                merek: 'CHBM',
+                negara: 'Indonesia',
+                gaya: 'Biker / Streetwear',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Ya',
+                jenisKulit: 'Kulit sintetis',
+                dikirim: 'KOTA BANYUWANGI',
+                judul: 'Topi CHBM - Sentuhan Street Style',
+                teks: 'Topi CHBM hadir dengan desain streetwear modern, cocok untuk tampilan santai dan percaya diri. Bagian depan topi menampilkan logo yang kuat tanpa berlebihan, sempurna untuk outfit harian Anda.'
+            },
+            'Topi Delibra': {
+                bahan: 'Katun campuran premium',
+                stok: '28',
+                merek: 'Delibra',
+                negara: 'Indonesia',
+                gaya: 'Sporty & Modern',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Tidak',
+                jenisKulit: 'Katun lembut',
+                dikirim: 'KOTA BANDUNG',
+                judul: 'Topi Delibra - Energi Aktif',
+                teks: 'Topi Delibra dibuat untuk aktivitas kasual dan olahraga ringan. Sentuhan warna minimalis membuatnya mudah dipadukan dengan jaket, kaos, atau celana training favorit.'
+            },
+            'Topi Polo': {
+                bahan: 'Kanvas halus',
+                stok: '19',
+                merek: 'Polo',
+                negara: 'Indonesia',
+                gaya: 'Elegan Casual',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Ya',
+                jenisKulit: 'Kanvas',
+                dikirim: 'KOTA SURABAYA',
+                judul: 'Topi Polo - Simple & Stylish',
+                teks: 'Topi Polo menawarkan kesan rapi namun santai. Cocok untuk tampilan urban, pertemuan kasual, atau hangout akhir pekan dengan teman.'
+            },
+            'Topi Nike': {
+                bahan: 'Polyester ringan',
+                stok: '33',
+                merek: 'Nike',
+                negara: 'Indonesia',
+                gaya: 'Casual Streetwear',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Tidak',
+                jenisKulit: 'Sintetis ringan',
+                dikirim: 'KOTA JAKARTA',
+                judul: 'Topi Nike - Klasik Street',
+                teks: 'Topi Nike didesain untuk mereka yang menyukai gaya olahraga sehari-hari. Materialnya ringan dan nyaman, membuat aktivitas harian terasa lebih segar.'
+            },
+            'Topi NY': {
+                bahan: 'Katun premium',
+                stok: '24',
+                merek: 'NY',
+                negara: 'Indonesia',
+                gaya: 'Minimalis & Elegan',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Ya',
+                jenisKulit: 'Katun lembut',
+                dikirim: 'KOTA SEMARANG',
+                judul: 'Topi NY - Simpel dan Serbaguna',
+                teks: 'Topi NY hadir sebagai pilihan aman untuk berbagai outfit. Warna netral membuatnya cocok dipadukan dengan hampir semua pakaian.'
+            },
+            'Topi Puma': {
+                bahan: 'Polyester tahan lama',
+                stok: '21',
+                merek: 'Puma',
+                negara: 'Indonesia',
+                gaya: 'Street Sport',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Tidak',
+                jenisKulit: 'Sintetis',
+                dikirim: 'KOTA MAKASSAR',
+                judul: 'Topi Puma - Vibe Sporty',
+                teks: 'Topi Puma dirancang untuk Anda yang aktif dan ingin tampil trendi. Detail logo dan cutting modern membuatnya tampil lebih dinamis.'
+            },
+            'Topi Adidas': {
+                bahan: 'Kanvas premium',
+                stok: '16',
+                merek: 'Adidas',
+                negara: 'Indonesia',
+                gaya: 'Street Classic',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Ya',
+                jenisKulit: 'Kanvas',
+                dikirim: 'KOTA MALANG',
+                judul: 'Topi Adidas - Klasik Streetwear',
+                teks: 'Topi Adidas memberikan tampilan streetwear klasik yang mudah dipadu padankan. Cocok dipakai untuk hangout, berjalan-jalan, atau tampilan kasual sehari-hari.'
+            },
+            'Topi Stone Island': {
+                bahan: 'Nylon premium',
+                stok: '12',
+                merek: 'Stone Island',
+                negara: 'Indonesia',
+                gaya: 'Premium Urban',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Tidak',
+                jenisKulit: 'Nylon halus',
+                dikirim: 'KOTA JEMBER',
+                judul: 'Topi Stone Island - Eksklusif dan Berkelas',
+                teks: 'Topi Stone Island menonjolkan nuansa premium dengan detail yang elegan. Pilihan tepat untuk meningkatkan kesan eksklusif pada outfit streetwear Anda.'
+            },
+            'Topi Rucas': {
+                bahan: 'Kanvas tebal',
+                stok: '9',
+                merek: 'Rucas',
+                negara: 'Indonesia',
+                gaya: 'Unik & Berani',
+                kelamin: 'Unisex',
+                custom: 'Tidak',
+                mystery: 'Ya',
+                jenisKulit: 'Kanvas',
+                dikirim: 'KOTA MALANG',
+                judul: 'Topi Rucas - Tampil Beda',
+                teks: 'Topi Rucas hadir dengan desain yang lebih berani dan unik. Cocok untuk Anda yang ingin memberi penegasan gaya tanpa meninggalkan kesan nyaman.'
+            }
+        };
+
+        let produk = "";
+        let harga = 0;
+        let foto = "";
+        let isRotating = false;
+        let lastAngle = 0;
+        let currentRotation = 0;
+
+        let salesChart;
+        let productSales = {};
+        const productSalesKey = 'topcapsProductSales';
+        const productSalesLabels = Object.keys(defaultRatings);
+
+        function initPaymentListeners() {
+            document.querySelectorAll('input[name="payment"]').forEach(el => {
+                el.addEventListener('change', handlePaymentSelect);
+            });
+        }
+
+        function updateProductDetail(name) {
+            const data = productDetails[name];
+            if (!data) return;
+
+            document.getElementById('deskripsiJudul').innerText = data.judul;
+            document.getElementById('deskripsiTeks').innerText = data.teks;
+            document.getElementById('deskripsiList').innerHTML = `
+        <li><strong>Bahan:</strong> ${data.bahan}</li>
+        <li><strong>Stok:</strong> ${data.stok}</li>
+        <li><strong>Merek:</strong> ${data.merek}</li>
+        <li><strong>Negara Asal:</strong> ${data.negara}</li>
+        <li><strong>Gaya Topi:</strong> ${data.gaya}</li>
+        <li><strong>Jenis Kelamin:</strong> ${data.kelamin}</li>
+        <li><strong>Produk Custom:</strong> ${data.custom}</li>
+        <li><strong>Mystery Box:</strong> ${data.mystery}</li>
+        <li><strong>Jenis Kulit:</strong> ${data.jenisKulit}</li>
+        <li><strong>Dikirim Dari:</strong> ${data.dikirim}</li>
+    `;
+        }
+
+        initPaymentListeners();
+
+        function beli(n, h, f) {
+            updateProductDetail(n);
+
+            produk = n;
+            harga = h;
+            foto = f;
+            currentRotation = 0;
+
+            document.getElementById("NamaProduk").innerText = n;
+            document.getElementById("HargaProduk").innerText = h.toLocaleString();
+            document.getElementById("TotalHarga").innerText = h.toLocaleString();
+            document.getElementById("FotoProduk").src = f;
+            document.getElementById("FotoProduk").style.transform = `rotate(0deg)`;
+
+            setupRotationListener();
+
+            document.getElementById("bayar").style.display = "block";
+
+            document.getElementById("bayar").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        function handlePaymentSelect(e) {
+            const phoneWrapper = document.getElementById('paymentPhoneWrapper');
+            const phoneInput = document.getElementById('paymentPhone');
+            const paymentLabel = e.target.value;
+            phoneWrapper.style.display = 'block';
+            phoneInput.disabled = false;
+            phoneInput.required = true;
+            phoneInput.placeholder = paymentLabel === 'COD' ? '0812-xxxx-xxxx' : '0812-xxxx-xxxx';
+            document.getElementById('paymentHelp').innerText = paymentLabel === 'COD'
+                ? 'Isi nomor penerima untuk konfirmasi pengantaran.'
+                : 'Isi nomor DANA/OVO/GoPay yang digunakan.';
+        }
+
+        function bayar(e) {
+
+            e.preventDefault();
+
+            const nama = document.getElementById('namaPembeli').value.trim();
+            const alamat = document.getElementById('alamatPembeli').value.trim();
+            const warna = document.getElementById('warna').value.trim();
+            const ukuran = document.getElementById('ukuran').value.trim();
+            const payment = document.querySelector('input[name="payment"]:checked');
+            const metode = payment ? payment.value : '';
+            const phone = document.getElementById('paymentPhone').value.trim();
+            const tanggal = new Date().toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            });
+            const idTransaksi = 'TRX' + Date.now();
+
+            const strukData = {
+                nama: nama || 'Pembeli',
+                alamat: alamat || '-',
+                warna: warna || '-',
+                ukuran: ukuran || '-',
+                produk: produk || '-',
+                harga: harga || 0,
+                total: harga || 0,
+                metode: metode || '-',
+                telepon: phone || '-',
+                tanggal,
+                idTransaksi,
+                foto: foto || ''
+            };
+
+            localStorage.setItem('strukData', JSON.stringify(strukData));
+
+            alert("PESANAN ANDA TELAH KAMI TERIMA");
+
+            incrementSales(produk, 1);
+
+            window.location.href = 'qris.html';
+        }
+
+        function getSavedProductSales() {
+            const saved = localStorage.getItem(productSalesKey);
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (parsed && typeof parsed === 'object') {
+                        return parsed;
+                    }
+                } catch (error) {
+                    console.warn('Gagal membaca data penjualan per produk:', error);
+                }
+            }
+            const initial = {};
+            productSalesLabels.forEach(name => {
+                initial[name] = defaultRatings[name] ? defaultRatings[name].Terjual : 0;
+            });
+            return initial;
+        }
+
+        function saveProductSales() {
+            localStorage.setItem(productSalesKey, JSON.stringify(productSales));
+        }
+
+        function updateSalesCountText() {
+            const total = productSalesLabels.reduce((sum, name) => sum + (productSales[name] || 0), 0);
+            const element = document.getElementById('totalSalesCount');
+            if (element) {
+                element.innerText = `Total Penjualan: ${total}`;
+            }
+        }
+
+        function initSalesChart() {
+            productSales = getSavedProductSales();
+            const ctx = document.getElementById('salesChart');
+            if (!ctx) return;
+
+            salesChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: productSalesLabels,
+                    datasets: [{
+                        label: 'Penjualan Topi',
+                        data: productSalesLabels.map(name => productSales[name] || 0),
+                        backgroundColor: 'rgba(217, 83, 79, 0.7)',
+                        borderColor: 'rgba(217, 83, 79, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Diagram Penjualan TopCaps per Produk'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            updateSalesCountText();
+        }
+
+        function incrementSales(productName, amount = 1) {
+            if (!productSales || typeof productSales !== 'object') {
+                productSales = getSavedProductSales();
+            }
+            if (!productSalesLabels.includes(productName)) {
+                productName = productSalesLabels[productSalesLabels.length - 1];
+            }
+            productSales[productName] = (productSales[productName] || 0) + amount;
+            if (salesChart) {
+                salesChart.data.datasets[0].data = productSalesLabels.map(name => productSales[name] || 0);
+                salesChart.update();
+            }
+            saveProductSales();
+            updateSalesCountText();
+        }
+
+        function setupRotationListener() {
+            const img = document.getElementById('FotoProduk');
+            let startX = 0;
+            let startRotation = 0;
+
+            img.addEventListener('mousedown', (e) => {
+                isRotating = true;
+                startX = e.clientX;
+                startRotation = currentRotation;
+                img.style.transition = 'none';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isRotating) return;
+
+                const deltaX = e.clientX - startX;
+                currentRotation = startRotation + (deltaX / 2);
+                img.style.transform = `rotate(${currentRotation}deg)`;
+            });
+
+            document.addEventListener('mouseup', () => {
+                isRotating = false;
+                img.style.transition = 'transform 0.3s ease';
+            });
+        }
+
+        window.addEventListener('click', function (event) {
+            const modal = document.getElementById('zoomModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initSalesChart();
+        });
+
+    </script>
 </body>
+
 </html>
