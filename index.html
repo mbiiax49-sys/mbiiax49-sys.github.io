@@ -742,14 +742,16 @@
 
         function updateRatingDisplay() {
             const ratings = getRatings();
+            const sales = getSavedProductSales();
             for (const [product, data] of Object.entries(ratings)) {
                 const card = document.querySelector(`[data-product="${product}"]`);
                 if (card) {
                     const ratingEl = card.querySelector('.rating');
                     const reviewEl = card.querySelector('.review-count');
                     if (ratingEl && reviewEl) {
+                        const soldCount = typeof sales[product] === 'number' ? sales[product] : data.Terjual;
                         ratingEl.innerHTML = `${getStarHtml(data.rating)}<span>${data.rating.toFixed(1)}</span>`;
-                        reviewEl.textContent = `${data.Terjual} Terjual`;
+                        reviewEl.textContent = `${soldCount} Terjual`;
                     }
                 }
             }
@@ -1035,6 +1037,7 @@
             alert("PESANAN ANDA TELAH KAMI TERIMA");
 
             incrementSales(produk, 1);
+            updateRatingDisplay();
 
             window.location.href = 'qris.html';
         }
